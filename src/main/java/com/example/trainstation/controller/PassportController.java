@@ -2,11 +2,12 @@ package com.example.trainstation.controller;
 
 import com.example.trainstation.controller.model.request.PassportRequest;
 import com.example.trainstation.controller.model.response.PassportResponse;
+import com.example.trainstation.db.repo.PassportRepo;
 import com.example.trainstation.db.services.PassportComponent;
-import com.example.trainstation.entities.Passport;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,6 +31,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PassportController {
     private final PassportComponent passportComponent;
+    @Autowired
+    PassportRepo repo;
 
     @Operation(
             description = "Получение всех паспортов",
@@ -51,7 +54,7 @@ public class PassportController {
             hidden = false
     )
     @ApiResponse(responseCode = "200", description = "PassportResponse")
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public PassportResponse findById(@PathVariable(name = "id") final long id) throws Exception{
         return new PassportResponse(passportComponent.findByIdOrDie(id));
     }
