@@ -91,22 +91,8 @@ public class PassportController {
     @ApiResponse(responseCode = "200", description = "list of OwnerResponse")
     @PutMapping("/{id}")
     public void update(@RequestBody PassportRequest passportRequest,
-                       @PathVariable(name = "id") String id) throws Exception {
-        if(!isNumeric(id)) return;
-
-        passportComponent.update(passportRequest.passportBuider(), Long.getLong(id));
-    }
-
-    public boolean isNumeric(String strNum) {
-        if (strNum == null) {
-            return false;
-        }
-        try {
-            Long d = Long.getLong(strNum);
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-        return true;
+                       @PathVariable(name = "id") final long id) throws Exception {
+        passportComponent.update(passportRequest.passportBuider(), id);
     }
 }
 
