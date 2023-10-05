@@ -40,6 +40,7 @@ public class PassportComponentImplTest {
         assertEquals(passportfromTable.getBoxingWeight(),2.3);
         assertEquals(passportfromTable.getLoadCapacity(),3.4);
         assertEquals(passportfromTable.getType(),Type.AUTOTRACK);
+        passportComponent.deleteById( passportfromTable.getId());
     }
 
     @DisplayName("2. Проверка получения всех паспортов вагонов.")
